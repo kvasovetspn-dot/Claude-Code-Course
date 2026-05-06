@@ -69,7 +69,8 @@
       text-decoration: none;
       letter-spacing: .02em;
     }
-    .nav-logo span { color: var(--teal); }
+    .nav-logo span { color: var(--teal); font-style: italic; }
+    .brand em { color: var(--teal); font-style: italic; }
 
     .nav-links {
       display: flex;
@@ -697,7 +698,7 @@
 
 <!-- ── NAVBAR ── -->
 <nav>
-  <a class="nav-logo" href="#"><span>Своє</span>Рідне</a>
+  <a class="nav-logo" href="#">Своє<span>Рідне</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">Про нас</a></li>
     <li><a href="#events">Події</a></li>
@@ -762,7 +763,7 @@
   <span class="section-label">Хто ми</span>
   <h2 class="section-title">Культура — живою мовою</h2>
   <p class="section-desc">
-    СвоєРідне — це простір, де українська культура оживає в нових форматах: без нудних музейних екскурсій, зате з живою музикою, рукоділлям, танцями та справжньою спільнотою.
+    <span class="brand">Своє<em>Рідне</em></span> — це простір, де українська культура оживає в нових форматах: без нудних музейних екскурсій, зате з живою музикою, рукоділлям, танцями та справжньою спільнотою.
   </p>
   <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
@@ -785,7 +786,7 @@
     <div class="about-card reveal">
       <div class="about-icon">🎁</div>
       <h3>Символічні подарунки</h3>
-      <p>Щомісяця учасники отримують браслет у етностилі з написом «СвоєРідне» — маленький символ причетності до великої культури.</p>
+      <p>Щомісяця учасники отримують браслет у етностилі з написом «<span class="brand">Своє<em>Рідне</em></span>» — маленький символ причетності до великої культури.</p>
     </div>
   </div>
 </section>
@@ -1014,7 +1015,7 @@
 
           <div class="form-check">
             <input type="checkbox" id="consent" name="consent" />
-            <label for="consent">Я погоджуюся на обробку персональних даних та отримання інформаційних листів від СвоєРідне.</label>
+            <label for="consent">Я погоджуюся на обробку персональних даних та отримання інформаційних листів від <span class="brand">Своє<em>Рідне</em></span>.</label>
           </div>
 
           <button type="submit" class="btn btn-teal btn-submit">✦ Надіслати заявку</button>
@@ -1040,7 +1041,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a class="nav-logo" href="#"><span>Своє</span>Рідне</a>
+      <a class="nav-logo" href="#">Своє<span>Рідне</span></a>
       <p>Автентичні культурні події для тих, хто хоче по-справжньому відчути себе частиною своєї культури. Львів та онлайн.</p>
       <div class="social-links" style="margin-top:1.2rem;">
         <a class="social-link" href="#" title="Instagram">
@@ -1074,7 +1075,7 @@
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 СвоєРідне. Усі права захищено.</span>
+    <span>© 2026 <span class="brand">Своє<em>Рідне</em></span>. Усі права захищено.</span>
     <span>Зроблено з ❤️ до України</span>
   </div>
 </footer>
