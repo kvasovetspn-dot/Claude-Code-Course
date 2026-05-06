@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>СвоєРідне — Автентичні культурні події</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #F0EAD6;
+      --cream-dark:  #E4D9C0;
+      --dark:        #1A1A2E;
+      --teal:        #1B9E8A;
+      --teal-light:  #27BDA7;
+      --red:         #C0392B;
+      --red-soft:    #D44235;
+      --gold:        #C8973A;
+      --sage:        #8FAF7E;
+      --white:       #FAFAF8;
+      --shadow:      0 4px 32px rgba(26,26,46,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.15;
+    }
+
+    /* ── SVG pattern helper ── */
+    .pattern-bg {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23C0392B' stroke-width='1.2' opacity='0.18'%3E%3Cpolygon points='30,4 56,30 30,56 4,30'/%3E%3Cline x1='30' y1='10' x2='30' y2='50'/%3E%3Cline x1='10' y1='30' x2='50' y2='30'/%3E%3Ccircle cx='30' cy='30' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(240,234,214,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--cream-dark);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .9rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--dark);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .7rem 1.8rem;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      transition: all .22s;
+    }
+    .btn-teal {
+      background: var(--teal);
+      color: #fff;
+    }
+    .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(27,158,138,.35); }
+
+    .btn-red {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-red:hover { background: var(--red-soft); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(192,57,43,.35); }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--teal);
+      color: var(--teal);
+    }
+    .btn-outline:hover { background: var(--teal); color: #fff; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: .3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23C0392B' stroke-width='1.2' opacity='0.13'%3E%3Cpolygon points='30,4 56,30 30,56 4,30'/%3E%3Cline x1='30' y1='10' x2='30' y2='50'/%3E%3Cline x1='10' y1='30' x2='50' y2='30'/%3E%3Ccircle cx='30' cy='30' r='5'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: 1;
+    }
+
+    /* Decorative corner ornaments */
+    .hero-ornament {
+      position: absolute;
+      width: 220px;
+      opacity: .18;
+    }
+    .hero-ornament.tl { top: 80px; left: 5%; }
+    .hero-ornament.tr { top: 80px; right: 5%; transform: scaleX(-1); }
+    .hero-ornament.bl { bottom: 60px; left: 5%; transform: scaleY(-1); }
+    .hero-ornament.br { bottom: 60px; right: 5%; transform: scale(-1); }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 1px;
+      margin-bottom: 1.8rem;
+      animation: fadeDown .6s ease both;
+    }
+
+    #hero h1 {
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: .5rem;
+      animation: fadeDown .7s .1s ease both;
+    }
+    #hero h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+      font-weight: 400;
+      color: var(--dark);
+      opacity: .75;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.55;
+      animation: fadeDown .7s .2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeDown .7s .3s ease both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: .45;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll svg { width: 16px; }
+
+    /* ── ORNAMENT DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto 3rem;
+      max-width: 280px;
+    }
+    .divider-line { flex: 1; height: 1.5px; background: var(--red); opacity: .4; }
+    .divider-diamond {
+      width: 10px; height: 10px;
+      background: var(--red);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 5%; }
+
+    .section-label {
+      display: block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .8rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 3.5rem;
+      color: var(--dark);
+      opacity: .7;
+      line-height: 1.7;
+      font-size: .95rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-card {
+      padding: 2.2rem;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 4px;
+      position: relative;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .about-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--teal);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .about-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: .7rem;
+      color: var(--dark);
+    }
+
+    .about-card p {
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--dark);
+      opacity: .72;
+    }
+
+    /* ── EVENTS ── */
+    #events { background: var(--cream); }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: var(--white);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(26,26,46,.08);
+      transition: transform .22s, box-shadow .22s;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 32px rgba(26,26,46,.14); }
+
+    .event-header {
+      padding: 1.6rem 1.8rem 1rem;
+      position: relative;
+    }
+
+    .event-type {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .type-party   { background: #FFF0EE; color: var(--red); }
+    .type-show    { background: #E8F8F5; color: var(--teal); }
+    .type-workshop{ background: #FDF6E3; color: var(--gold); }
+    .type-festival{ background: #F0F8ED; color: #4CAF50; }
+
+    .event-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: .5rem;
+      line-height: 1.2;
+    }
+
+    .event-tagline {
+      font-size: .88rem;
+      color: var(--dark);
+      opacity: .65;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .event-meta {
+      padding: 0 1.8rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .event-meta-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .83rem;
+      color: var(--dark);
+      opacity: .7;
+    }
+    .event-meta-row svg { width: 14px; flex-shrink: 0; opacity: .6; }
+
+    .event-price-row {
+      padding: 1rem 1.8rem;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .event-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .event-price span { font-size: .8rem; font-weight: 400; opacity: .65; }
+
+    .btn-register {
+      font-size: .8rem;
+      padding: .6rem 1.3rem;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--white); }
+
+    .steps {
+      display: flex;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 220px;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+
+    .step h4 {
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+    }
+    .step p { font-size: .88rem; line-height: 1.6; opacity: .68; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,46,.6);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 8px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px) scale(.97);
+      transition: transform .25s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      padding: 2rem 2rem 1rem;
+      border-bottom: 1.5px solid var(--cream-dark);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .modal-header h2 { font-size: 1.9rem; }
+    .modal-header p { font-size: .88rem; opacity: .65; margin-top: .3rem; line-height: 1.5; }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: var(--dark);
+      opacity: .45;
+      padding: .2rem;
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .modal-close:hover { opacity: 1; }
+
+    .modal-body { padding: 1.8rem 2rem 2rem; }
+
+    .form-row { margin-bottom: 1.2rem; }
+    .form-row label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: .65;
+      margin-bottom: .4rem;
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: .92rem;
+      color: var(--dark);
+      background: var(--cream);
+      transition: border-color .2s;
+      outline: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { border-color: var(--teal); }
+    .form-row textarea { resize: vertical; min-height: 80px; }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-check input[type="checkbox"] { margin-top: 2px; accent-color: var(--teal); cursor: pointer; }
+    .form-check label { font-size: .83rem; opacity: .7; cursor: pointer; line-height: 1.5; }
+
+    .btn-submit {
+      width: 100%;
+      padding: .95rem;
+      font-size: .9rem;
+    }
+
+    .form-error {
+      font-size: .78rem;
+      color: var(--red);
+      margin-top: .3rem;
+      display: none;
+    }
+    .form-row.has-error input,
+    .form-row.has-error select { border-color: var(--red); }
+    .form-row.has-error .form-error { display: block; }
+
+    /* Success state */
+    .success-view {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .success-view.show { display: block; }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #E8F8F5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+    }
+    .success-view h3 { font-size: 2rem; margin-bottom: .7rem; }
+    .success-view p { opacity: .68; line-height: 1.6; font-size: .92rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding: 3.5rem 5% 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .footer-brand .nav-logo { font-size: 1.8rem; color: #fff; }
+    .footer-brand .nav-logo span { color: var(--teal); }
+    .footer-brand p {
+      font-size: .88rem;
+      line-height: 1.65;
+      opacity: .55;
+      margin-top: .8rem;
+      max-width: 280px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Inter', sans-serif;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .45;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .55rem; }
+    .footer-col ul a {
+      text-decoration: none;
+      color: rgba(255,255,255,.7);
+      font-size: .88rem;
+      transition: color .2s;
+    }
+    .footer-col ul a:hover { color: var(--teal); }
+
+    .social-links {
+      display: flex;
+      gap: .8rem;
+      margin-top: .5rem;
+    }
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: rgba(255,255,255,.7);
+      font-size: .85rem;
+      transition: all .2s;
+    }
+    .social-link:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: .8rem;
+      opacity: .4;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--cream); padding: 1.5rem 5%; gap: 1rem; border-bottom: 2px solid var(--cream-dark); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+
+      .form-row-2 { grid-template-columns: 1fr; }
+
+      .modal-header, .modal-body { padding-left: 1.4rem; padding-right: 1.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a class="nav-logo" href="#"><span>Своє</span>Рідне</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Про нас</a></li>
+    <li><a href="#events">Події</a></li>
+    <li><a href="#how">Як це працює</a></li>
+    <li><a href="#" class="btn btn-teal" onclick="openModal()">Зареєструватись</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+
+  <!-- Corner ornaments (inline SVG flower motif) -->
+  <svg class="hero-ornament tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 L190 10 M10 10 L10 190" stroke="#C0392B" stroke-width="3"/>
+    <path d="M30 10 Q10 30 30 50 Q10 70 30 90 Q10 110 30 130" stroke="#C0392B" stroke-width="2"/>
+    <circle cx="30" cy="50" r="8" fill="#1B9E8A" opacity=".6"/>
+    <circle cx="30" cy="90" r="8" fill="#C0392B" opacity=".6"/>
+    <circle cx="30" cy="130" r="8" fill="#C8973A" opacity=".6"/>
+    <path d="M10 30 Q30 10 50 30 Q70 10 90 30 Q110 10 130 30" stroke="#C0392B" stroke-width="2"/>
+    <circle cx="50" cy="30" r="8" fill="#1B9E8A" opacity=".6"/>
+    <circle cx="90" cy="30" r="8" fill="#C0392B" opacity=".6"/>
+    <circle cx="130" cy="30" r="8" fill="#C8973A" opacity=".6"/>
+  </svg>
+  <svg class="hero-ornament tr" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 L190 10 M10 10 L10 190" stroke="#C0392B" stroke-width="3"/>
+    <path d="M30 10 Q10 30 30 50 Q10 70 30 90 Q10 110 30 130" stroke="#C0392B" stroke-width="2"/>
+    <circle cx="30" cy="50" r="8" fill="#1B9E8A" opacity=".6"/>
+    <circle cx="30" cy="90" r="8" fill="#C0392B" opacity=".6"/>
+    <circle cx="30" cy="130" r="8" fill="#C8973A" opacity=".6"/>
+    <path d="M10 30 Q30 10 50 30 Q70 10 90 30 Q110 10 130 30" stroke="#C0392B" stroke-width="2"/>
+    <circle cx="50" cy="30" r="8" fill="#1B9E8A" opacity=".6"/>
+    <circle cx="90" cy="30" r="8" fill="#C0392B" opacity=".6"/>
+    <circle cx="130" cy="30" r="8" fill="#C8973A" opacity=".6"/>
+  </svg>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">✦ Автентична українська культура ✦</div>
+    <h1>Своє<em>Рідне</em></h1>
+    <p class="hero-sub">
+      Інтерактивні етнокультурні події — вечірки, фестивалі, вистави та майстер-класи — для тих, хто хоче по-справжньому відчути себе частиною своєї культури.
+    </p>
+    <div class="hero-ctas">
+      <a href="#events" class="btn btn-teal">Переглянути події</a>
+      <a href="#" class="btn btn-outline" onclick="openModal()">Зареєструватись зараз</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Далі</span>
+    <svg viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 2 L8 22 M2 16 L8 22 L14 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <span class="section-label">Хто ми</span>
+  <h2 class="section-title">Культура — живою мовою</h2>
+  <p class="section-desc">
+    СвоєРідне — це простір, де українська культура оживає в нових форматах: без нудних музейних екскурсій, зате з живою музикою, рукоділлям, танцями та справжньою спільнотою.
+  </p>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <div class="about-icon">🎭</div>
+      <h3>Автентичний досвід</h3>
+      <p>Вистави, вечірки та фестивалі в нових форматах — з інтерактивним елементом: каराоке, аукціони, змагання, рукоділля. Жодних застарілих форматів.</p>
+    </div>
+    <div class="about-card reveal">
+      <div class="about-icon">🌿</div>
+      <h3>Жива спільнота</h3>
+      <p>Ти знайдеш своїх людей — тих, хто любить культурно проводити час. Регулярні зустрічі «на чай і каву», знайомства, спілкування та підтримка.</p>
+    </div>
+    <div class="about-card reveal">
+      <div class="about-icon">🎨</div>
+      <h3>Запрошені експерти</h3>
+      <p>На кожній події — локальні працівники культури, співаки, майстри, танцюристи та фотографи. Ти вчишся у найкращих та надихаєшся їхніми історіями.</p>
+    </div>
+    <div class="about-card reveal">
+      <div class="about-icon">🎁</div>
+      <h3>Символічні подарунки</h3>
+      <p>Щомісяця учасники отримують браслет у етностилі з написом «СвоєРідне» — маленький символ причетності до великої культури.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ── -->
+<section id="events">
+  <span class="section-label">Найближчі події</span>
+  <h2 class="section-title">Обери свій захід</h2>
+  <p class="section-desc">
+    Вечірки, фестивалі, вистави та майстер-класи — у вихідні та святкові дні. Реєструйся заздалегідь — місць обмаль.
+  </p>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+  <div class="events-grid">
+
+    <!-- Event 1 -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-type type-show">🎭 Вистава</span>
+        <h3>«Тіні забутих предків»</h3>
+        <p class="event-tagline">Інтерактивна вистава за мотивами Коцюбинського з живою музикою, традиційним одягом та зануренням у карпатський побут.</p>
+      </div>
+      <div class="event-meta">
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          24 травня 2026, субота, 19:00
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Народний дім «Просвіта», Львів
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Тривалість: ~2 год
+        </div>
+      </div>
+      <div class="event-price-row">
+        <div class="event-price">350 <span>грн / квиток</span></div>
+        <button class="btn btn-teal btn-register" onclick="openModal('Вистава «Тіні забутих предків» — 24 травня')">Зареєструватись</button>
+      </div>
+    </div>
+
+    <!-- Event 2 -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-type type-party">🎉 Етновечірка</span>
+        <h3>«Вечорниці 2026»</h3>
+        <p class="event-tagline">Сучасна інтерпретація традиційних вечорниць: живий оркестр, етно-диско, аукціон вишиванок і знайомства у найкращому стилі.</p>
+      </div>
+      <div class="event-meta">
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          31 травня 2026, субота, 20:00
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Культурний центр УКУ, Львів
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Тривалість: ~3 год
+        </div>
+      </div>
+      <div class="event-price-row">
+        <div class="event-price">280 <span>грн / квиток</span></div>
+        <button class="btn btn-red btn-register" onclick="openModal('Етновечірка «Вечорниці 2026» — 31 травня')">Зареєструватись</button>
+      </div>
+    </div>
+
+    <!-- Event 3 -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-type type-workshop">🧵 Майстер-клас</span>
+        <h3>Вишивка бісером</h3>
+        <p class="event-tagline">Навчись традиційної техніки вишивки бісером від майстра Оксани Литвин. Усі матеріали включено, результат забираєш додому.</p>
+      </div>
+      <div class="event-meta">
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          7 червня 2026, неділя, 12:00
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Майстерня СвоєРідне, Львів
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Тривалість: ~2.5 год
+        </div>
+      </div>
+      <div class="event-price-row">
+        <div class="event-price">420 <span>грн / місце</span></div>
+        <button class="btn btn-teal btn-register" onclick="openModal('Майстер-клас з вишивки бісером — 7 червня')">Зареєструватись</button>
+      </div>
+    </div>
+
+    <!-- Event 4 -->
+    <div class="event-card reveal">
+      <div class="event-header">
+        <span class="event-type type-festival">🌸 Фестиваль</span>
+        <h3>«Своя Земля»</h3>
+        <p class="event-tagline">Літній фестиваль під відкритим небом: концерти, ярмарок ремесел, танці, гастрономія та виставки локальних митців.</p>
+      </div>
+      <div class="event-meta">
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          21 червня 2026, неділя, 14:00
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Відкрита сцена, Стрийський парк, Львів
+        </div>
+        <div class="event-meta-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Тривалість: весь день
+        </div>
+      </div>
+      <div class="event-price-row">
+        <div class="event-price">150 <span>грн / квиток</span></div>
+        <button class="btn btn-teal btn-register" onclick="openModal('Фестиваль «Своя Земля» — 21 червня')">Зареєструватись</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <span class="section-label">Як зареєструватись</span>
+  <h2 class="section-title">Три прості кроки</h2>
+  <p class="section-desc">Від вибору події до зустрічі зі «своїми» — усього три хвилини.</p>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h4>Обери подію</h4>
+      <p>Переглянь найближчі вистави, вечірки, фестивалі та майстер-класи і вибери те, що найбільше тебе приваблює.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h4>Заповни форму</h4>
+      <p>Вкажи своє ім'я, пошту та телефон. Ми надішлемо підтвердження і всі деталі щодо місця й часу.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h4>Приходь та насолоджуйся</h4>
+      <p>Зустрінь нових людей, поринь у культуру та отримай частинку чогось справді рідного.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── REGISTRATION MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnBackdrop(event)">
+  <div class="modal" id="modal">
+    <!-- Form view -->
+    <div id="formView">
+      <div class="modal-header">
+        <div>
+          <h2>Реєстрація</h2>
+          <p id="modalEventName">Заповни форму — і ми надішлемо підтвердження на твою пошту.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="regForm" onsubmit="submitForm(event)" novalidate>
+          <div class="form-row-2">
+            <div class="form-row" id="row-name">
+              <label for="name">Ім'я та прізвище *</label>
+              <input type="text" id="name" name="name" placeholder="Марія Коваленко" />
+              <span class="form-error">Введи своє ім'я</span>
+            </div>
+            <div class="form-row" id="row-phone">
+              <label for="phone">Телефон *</label>
+              <input type="tel" id="phone" name="phone" placeholder="+38 (___) ___ __ __" />
+              <span class="form-error">Введи номер телефону</span>
+            </div>
+          </div>
+
+          <div class="form-row" id="row-email">
+            <label for="email">Електронна пошта *</label>
+            <input type="email" id="email" name="email" placeholder="maria@example.com" />
+            <span class="form-error">Введи коректну email-адресу</span>
+          </div>
+
+          <div class="form-row" id="row-event">
+            <label for="event">Подія *</label>
+            <select id="event" name="event">
+              <option value="">— Обери подію —</option>
+              <option value="show">🎭 Вистава «Тіні забутих предків» — 24 травня</option>
+              <option value="party">🎉 Етновечірка «Вечорниці 2026» — 31 травня</option>
+              <option value="workshop">🧵 Майстер-клас з вишивки бісером — 7 червня</option>
+              <option value="festival">🌸 Фестиваль «Своя Земля» — 21 червня</option>
+            </select>
+            <span class="form-error">Обери подію</span>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-row" id="row-tickets">
+              <label for="tickets">Кількість квитків *</label>
+              <select id="tickets" name="tickets">
+                <option value="1">1 квиток</option>
+                <option value="2">2 квитки</option>
+                <option value="3">3 квитки</option>
+                <option value="4">4 квитки</option>
+                <option value="5+">5+ квитків</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="source">Як дізнались про нас?</label>
+              <select id="source" name="source">
+                <option value="">— Обери —</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="friends">Від друзів</option>
+                <option value="partner">Від партнерів</option>
+                <option value="other">Інше</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="comment">Коментар або побажання</label>
+            <textarea id="comment" name="comment" placeholder="Маєш питання або особливі побажання?"></textarea>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="consent" name="consent" />
+            <label for="consent">Я погоджуюся на обробку персональних даних та отримання інформаційних листів від СвоєРідне.</label>
+          </div>
+
+          <button type="submit" class="btn btn-teal btn-submit">✦ Надіслати заявку</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Success view -->
+    <div class="success-view" id="successView">
+      <div class="success-icon">🌿</div>
+      <h3>Заявку надіслано!</h3>
+      <p>
+        Дякуємо! Ми отримали твою реєстрацію і зовсім скоро надішлемо підтвердження та всі деталі на твою електронну пошту.<br><br>
+        До зустрічі — будь собою, будь рідним ✦
+      </p>
+      <br/>
+      <button class="btn btn-teal" onclick="closeModal()" style="width:100%">Закрити</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#"><span>Своє</span>Рідне</a>
+      <p>Автентичні культурні події для тих, хто хоче по-справжньому відчути себе частиною своєї культури. Львів та онлайн.</p>
+      <div class="social-links" style="margin-top:1.2rem;">
+        <a class="social-link" href="#" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="social-link" href="#" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Навігація</h5>
+      <ul>
+        <li><a href="#about">Про нас</a></li>
+        <li><a href="#events">Найближчі події</a></li>
+        <li><a href="#how">Як зареєструватись</a></li>
+        <li><a href="#" onclick="openModal()">Реєстрація</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Контакти</h5>
+      <ul>
+        <li><a href="mailto:nastusia31052008k@gmail.com">nastusia31052008k@gmail.com</a></li>
+        <li><a href="#">Instagram: @svoeridne</a></li>
+        <li><a href="#">Facebook: СвоєРідне</a></li>
+        <li><a href="#">Львів, Україна</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 СвоєРідне. Усі права захищено.</span>
+    <span>Зроблено з ❤️ до України</span>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script>
+  /* Hamburger menu */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  /* Modal */
+  function openModal(eventName) {
+    const overlay = document.getElementById('modalOverlay');
+    const select  = document.getElementById('event');
+    const label   = document.getElementById('modalEventName');
+
+    if (eventName) {
+      label.textContent = eventName;
+      const opts = select.options;
+      for (let i = 0; i < opts.length; i++) {
+        if (opts[i].text.includes(eventName.split('—')[0].trim().replace(/^[🎭🎉🧵🌸]\s*/, ''))) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    } else {
+      label.textContent = 'Заповни форму — і ми надішлемо підтвердження на твою пошту.';
+    }
+
+    document.getElementById('formView').style.display = '';
+    document.getElementById('successView').classList.remove('show');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeOnBackdrop(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* Form validation & submit */
+  function submitForm(e) {
+    e.preventDefault();
+    let valid = true;
+
+    const fields = [
+      { id: 'row-name',  input: 'name',  check: v => v.trim().length > 1 },
+      { id: 'row-phone', input: 'phone', check: v => v.trim().length > 6 },
+      { id: 'row-email', input: 'email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'row-event', input: 'event', check: v => v !== '' },
+    ];
+
+    fields.forEach(f => {
+      const row   = document.getElementById(f.id);
+      const val   = document.getElementById(f.input).value;
+      const ok    = f.check(val);
+      row.classList.toggle('has-error', !ok);
+      if (!ok) valid = false;
+    });
+
+    if (!document.getElementById('consent').checked) {
+      valid = false;
+      alert('Будь ласка, погодься на обробку персональних даних.');
+    }
+
+    if (!valid) return;
+
+    /* Simulate submission */
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.textContent = '⏳ Надсилаємо…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('successView').classList.add('show');
+      document.getElementById('regForm').reset();
+      btn.textContent = '✦ Надіслати заявку';
+      btn.disabled = false;
+    }, 1200);
+  }
+
+  /* Scroll-reveal */
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
