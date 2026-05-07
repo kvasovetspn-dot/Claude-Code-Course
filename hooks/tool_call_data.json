@@ -1,0 +1,9 @@
+{
+  "session_id": "2d6a1e4d-6...",
+  "transcript_path": "/Users/dev/.claude/transcripts/...",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Read",
+  "tool_input": {
+    "file_path": "/code/project/.env"
+  }
+}

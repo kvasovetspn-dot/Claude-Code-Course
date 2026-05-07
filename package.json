@@ -1,0 +1,22 @@
+{
+  "name": "claude-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "node setup.js"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvasovetspn-dot/Claude-Code-Course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kvasovetspn-dot/Claude-Code-Course/issues"
+  },
+  "homepage": "https://github.com/kvasovetspn-dot/Claude-Code-Course#readme"
+}
